@@ -1,0 +1,22 @@
+#%Module1.0#####################################################################
+##
+## Nuttcp modulefile
+##
+## modulefiles/
+##
+proc ModulesHelp { } {
+	global nuttcpVersion 
+	global nuttcpHome 
+
+	puts stderr "\t Use $nuttcp-home/bin/nuttcp "
+	puts stderr "\n\tVersion $nuttcpVersion\n"
+}
+
+module-whatis	"Use nuttcp for tcp testing"
+
+# for Tcl script use only
+set	nuttcpVersion 7.2.1 
+set 	nuttcpHome /opt/nuttcp
+
+prepend-path	PATH $nuttcpHome/bin	
+

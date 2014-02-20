@@ -1,0 +1,7 @@
+%post 
+## Check that nuttcp is in /etc/services
+/bin/grep -q nuttcp /etc/services
+if [ $? -ne 0 ]; then
+	echo  "nuttcp	5000/tcp" >> /etc/services
+	echo  "nuttcp	5000/udp" >> /etc/services
+fi

@@ -1,0 +1,6 @@
+ROLLNAME	= netperf
+VERSION		= 1.0
+RELEASE		= 0
+COLOR		= chocolate
+
+REDHAT.ROOT	= $(CURDIR)

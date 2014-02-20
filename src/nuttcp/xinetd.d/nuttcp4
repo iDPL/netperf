@@ -1,0 +1,12 @@
+# default: off
+# description: network performance testing server (developed from ttcp/nttcp)
+service nuttcp
+{
+	flags		= IPv4
+	socket_type	= stream        
+	wait		= no
+	user		= nobody
+	server		= /opt/nuttcp/bin/nuttcp
+	server_args     = -S -4
+	log_on_failure	+= USERID
+}
