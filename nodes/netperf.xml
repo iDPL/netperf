@@ -17,6 +17,8 @@
 	$Log$
 	</changelog>
 
+	<package>bwctl</package>
+	<package>I2util</package>
 	<package>nuttcp</package>
 	<package>roll-netperf-usersguide</package>
 
