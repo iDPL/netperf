@@ -1,0 +1,8 @@
+%post 
+## Check that bwctl is a user 
+/bin/grep -q bwctl /etc/passwd
+if [ $? -ne 0 ]; then
+	/usr/sbin/useradd -M -d /etc/bwctl -s /sbin/nologin bwctl
+fi
+/bin/chown -R bwctl /etc/bwctld
+
