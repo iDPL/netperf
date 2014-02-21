@@ -20,6 +20,7 @@
 	<package>bwctl</package>
 	<package>I2util</package>
 	<package>nuttcp</package>
+	<package>owamp</package>
 	<package>roll-netperf-usersguide</package>
 
 
