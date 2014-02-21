@@ -1,0 +1,8 @@
+%post 
+## Check that bwctl is a user 
+/bin/grep -q owamp /etc/passwd
+if [ $? -ne 0 ]; then
+	/usr/sbin/useradd -M -d /etc/owamp -s /sbin/nologin owamp
+fi
+/bin/chown -R owamp /etc/owamp
+
