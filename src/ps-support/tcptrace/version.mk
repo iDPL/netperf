@@ -1,0 +1,7 @@
+NAME=tcptrace
+VERSION=0.0
+BUILDROOT=$(CURDIR)/$(NAME).buildroot
+TARNAME = tcptrace
+TARVERSION = 6.6.7
+TARBALL_POSTFIX = tar.gz
+SOURCES = $(TARNAME)-$(TARVERSION).$(TARBALL_POSTFIX) $(NAME).Makefile.patch

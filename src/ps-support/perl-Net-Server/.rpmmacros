@@ -1,0 +1,5 @@
+%_topdir /export/home/repositories/netperf/src/ps-support/perl-Net-Server/../../../
+%_buildrootdir /export/home/repositories/netperf/src/ps-support/perl-Net-Server/perl-Net-Server.buildroot
+%buildroot /export/home/repositories/netperf/src/ps-support/perl-Net-Server/perl-Net-Server.buildroot
+%_var	/var
+%debug_package	%{nil}
