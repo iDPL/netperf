@@ -1,0 +1,41 @@
+#!/bin/bash
+#######################
+# Make sure some unused services are disabled.
+# Dependent on running in an 'upgrade' or 'new install' context.
+#######################
+
+if [ "$1" == "new" ]; then
+	/sbin/chkconfig apmd off 2> /dev/null || :
+	/sbin/chkconfig acpid off 2> /dev/null || :
+	/sbin/chkconfig autofs off 2> /dev/null || :
+	/sbin/chkconfig avahi-daemon off 2> /dev/null || :
+	/sbin/chkconfig avahi-dnsconfd off 2> /dev/null || :
+	/sbin/chkconfig bluetooth off 2> /dev/null || :
+	/sbin/chkconfig cpuspeed off 2> /dev/null || :
+	/sbin/chkconfig cups off 2> /dev/null || :
+	/sbin/chkconfig firstboot off 2> /dev/null || :
+	/sbin/chkconfig gpm off 2> /dev/null || :
+	/sbin/chkconfig haldaemon off 2> /dev/null || :
+	/sbin/chkconfig hidd off 2> /dev/null || :
+	/sbin/chkconfig irda off 2> /dev/null || :
+	/sbin/chkconfig irqbalance off 2> /dev/null || :
+	/sbin/chkconfig iscsi off 2> /dev/null || :
+	/sbin/chkconfig iscsid off 2> /dev/null || :
+	/sbin/chkconfig kudzu off 2> /dev/null || :
+	/sbin/chkconfig mdmonitor off 2> /dev/null || :
+	/sbin/chkconfig mdmpd off 2> /dev/null || :
+	/sbin/chkconfig netfs off 2> /dev/null || :
+	/sbin/chkconfig nfs off 2> /dev/null || :
+	/sbin/chkconfig nfslock off 2> /dev/null || :
+	/sbin/chkconfig pcscd off 2> /dev/null || :
+	/sbin/chkconfig portmap off 2> /dev/null || :
+	/sbin/chkconfig psacct off 2> /dev/null || :
+	/sbin/chkconfig readahead_early off 2> /dev/null || :
+	/sbin/chkconfig readahead_later off 2> /dev/null || :
+	/sbin/chkconfig rpcgssd off 2> /dev/null || :
+	/sbin/chkconfig rpcidmapd off 2> /dev/null || :
+	/sbin/chkconfig rpcsvcgssd off 2> /dev/null || :
+	/sbin/chkconfig smartd off 2> /dev/null || :
+	/sbin/chkconfig ypbind off 2> /dev/null || :
+	/sbin/chkconfig yum-updatesd off 2> /dev/null || :
+fi
