@@ -102,6 +102,7 @@ EPEL_PKGS = libnet \
 default: $(HOME)/.rpmmacros rpm-mkdirs $(COMPONENTS) RPMS
 	-yum install epel-release-6-8.noarch.rpm
 	make $(EPEL_PKGS)
+	-mkdir $(REDHAT.RPMS)/noarch
 	$(INSTALL) RPMS/*noarch*rpm $(REDHAT.RPMS)/noarch
 	$(INSTALL) RPMS/*$(ARCH)*rpm $(REDHAT.RPMS)/$(ARCH)
 RPMS:
