@@ -63,16 +63,22 @@ include Rules.mk
 
 GENTARGZ=$(patsubst %,%/*.tar.gz, $(COMPONENTS))
 
-default: $(HOME)/.rpmmacros rpm-mkdirs $(COMPONENTS)
+rpm:: 	default 
+
+default: $(HOME)/.rpmmacros rpm-mkdirs $(MINOR_PACKAGES) $(COMPONENTS) 
 	echo "Building perfSONAR Components"
 
 .PHONY: force
+
 $(COMPONENTS): force
 		( make -C $@ dist ) 
 		$(INSTALL) $@/*.tar.gz $(REDHAT.SOURCES)
 		$(INSTALL) $@/*.spec $(REDHAT.SPECS)
 		for s in $@/*spec; do rpmbuild -ba $(REDHAT.SPECS)/`basename $$s`;  done
 	
+$(MINOR_PACKAGES): force
+		make -C $@
 clean::
+	for i in $(MINOR_PACKAGES); do make -C $$i clean; done
 	rm -f $(GENTARGZ)
 	rm -rf $(NAME)-$(VERSION)

@@ -56,13 +56,22 @@
 #
 # $Log$
 
-REDHAT.ROOT = $(CURDIR)/../../../
+REDHAT.ROOT = $(CURDIR)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
 include Rules.mk
-pretar::
-	/bin/cp $(SOURCES) $(REDHAT.ROOT)/SOURCES
 
+default: $(HOME)/.rpmmacros rpm-mkdirs $(COMPONENTS)
+	echo "Building perfSONAR Components"
+
+.PHONY: force
+
+$(COMPONENTS): force
+		$(INSTALL) $@/*.tar.gz $(REDHAT.SOURCES)
+		- $(INSTALL) $@/*.patch $(REDHAT.SOURCES)
+		- $(INSTALL) $@/README.license $(REDHAT.SOURCES)
+		$(INSTALL) $@/*.spec $(REDHAT.SPECS)
+		for s in $@/*spec; do rpmbuild -ba $(REDHAT.SPECS)/`basename $$s`;  done 
+	
 clean::
 	rm -rf $(NAME)-$(VERSION)
-	rm -rf $(NAME).buildroot

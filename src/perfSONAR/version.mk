@@ -14,3 +14,4 @@ COMPONENTS	= perfSONAR_PS-MeshConfig \
 		perfSONAR_PS-PingER \
 		perfSONAR_PS-Client-API \
 		perfSONAR_PS-serviceTest 
+MINOR_PACKAGES = Minor_Packages
