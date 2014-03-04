@@ -62,3 +62,10 @@
 include Rolls.mk
 
 default: roll
+
+clean::
+	-/bin/rm bootstrap.py
+
+veryclean: clean
+	-/bin/rm _arch
+	-/bin/rm -rf RPMS SRPMS

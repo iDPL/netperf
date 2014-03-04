@@ -17,6 +17,13 @@
 	$Log$
 	</changelog>
 
+<!-- Perl Package Prerequisites for Building -->
+
+	<package>perl-Net</package>
+	<package>perl-NetAddr-IP</package>
+	<package>perl-Test-Pod perl-Test-Pod-Coverage</package>
+ 	<package>perl-Class-Accessor</package>
+
 	<package>bwctl</package>
 	<package>I2util</package>
 	<package>nuttcp</package>
