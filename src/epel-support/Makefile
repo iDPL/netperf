@@ -56,29 +56,59 @@
 #
 # $Log$
 
--include $(shell $(ROCKSROOT)/bin/arch).mk
--include $(shell $(ROCKSROOT)/bin/os).mk
+REDHAT.ROOT = $(CURDIR)/../../
 
-SRCDIRS = bwctl I2util nuttcp  owamp usersguide
-PERFSONAR = epel-support perfSONAR
+-include $(ROCKSROOT)/etc/Rules.mk
+include Rules.mk
 
+## Download packages from EPEL
 
-default:	pkg
+EPEL_PKGS = libnet \
+	perl-aliased \
+	perl-AnyEvent \
+	perl-AnyEvent-HTTP \
+	perl-Crypt-CBC \
+	perl-Crypt-DES \
+	perl-Carp-Assert \
+	perl-Net-Domain-TLD \
+	perl-Net-Daemon \
+	perl-Net-Netmask \
+	perl-Net-Server \
+	perl-DateTime-Format-Builder \
+	perl-DateTime-Format-ISO8601 \
+	perl-Expect \
+	perl-Hash-Merge \
+	perl-HTML-Template \
+	perl-IO-Interface \
+	perl-IPC-DirQueue \
+	perl-JSON-XS \
+	perl-Log-Dispatch \
+	perl-Log-Dispatch-FileRotate \
+	perl-Log-Log4perl \
+	perl-Mail-Sender \
+	perl-Mail-Sendmail \
+	perl-MD5 \
+	perl-Moose \
+	perl-Nagios-Plugin \
+	perl-Net-CIDR \
+	perl-Regexp-Common \
+	perl-Socket-GetAddrInfo \
+	perl-Statistics-Descriptive \
+	perl-Sys-MemInfo \
+	perl-Text-CSV_XS
 
-copyright pkg rpm::
-	for i in $(SRCDIRS) ; do \
-		cd $$i; \
-		$(MAKE) $@ || exit 2 ; \
-		cd ..; \
-	done
-	for i in $(PERFSONAR) ; do \
-		cd $$i; \
-		$(MAKE) || exit 2 ; \
-		cd ..; \
-	done
-copyright clean::
-	for i in $(SRCDIRS) $(PERFSONAR) ; do \
-		cd $$i; \
-		$(MAKE) $@ || exit 2 ; \
-		cd ..; \
-	done
+.PHONY: force RPMS $(EPEL_PKGS)
+
+default: $(HOME)/.rpmmacros rpm-mkdirs $(COMPONENTS) RPMS
+	-yum install epel-release-6-8.noarch.rpm
+	make $(EPEL_PKGS)
+	$(INSTALL) RPMS/*noarch*rpm $(REDHAT.RPMS)/noarch
+	$(INSTALL) RPMS/*$(ARCH)*rpm $(REDHAT.RPMS)/$(ARCH)
+RPMS:
+	-mkdir RPMS
+
+$(EPEL_PKGS): 
+	yumdownloader --resolve --disablerepo='*' --enablerepo=epel --destdir=RPMS $@
+
+clean::
+	/bin/rm -rf RPMS
