@@ -1,7 +1,8 @@
 NAME        	= perfSONAR
 VERSION     	= 3.3.2
 RELEASE 	= 1
-COMPONENTS	= perl-Net-IPTrie \
+COMPONENTS	= perl-NetAddr-IP \
+		perl-Net-IPTrie \
 		perl-Math-Int64 \
 		iperf3 \
 		perl-Sys-Syslog \

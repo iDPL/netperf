@@ -66,7 +66,7 @@ default: $(HOME)/.rpmmacros rpm-mkdirs $(COMPONENTS)
 
 .PHONY: force
 
-$(COMPONENTS): force
+$(COMPONENTS): force $(HOME)/.rpmmacros rpm-mkdirs
 		$(INSTALL) $@/*.tar.gz $(REDHAT.SOURCES)
 		- $(INSTALL) $@/*.patch $(REDHAT.SOURCES)
 		- $(INSTALL) $@/README.license $(REDHAT.SOURCES)

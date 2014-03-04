@@ -63,3 +63,10 @@
 PKGS="perl-Carp-Assert perl-Net-Domain-TLD perl-Net-Netmask perl-Net-Daemon perl-Crypt-CBC perl-Crypt-DES libnet libnet-devel"
 make -C src/epel-support $PKGS
 yum -y install --disablerepo='*' --enablerepo=epel $PKGS
+
+## Add Minor packages from PerfSONAR build
+MINOR_PKGS="perl-NetAddr-IP"
+make -C src/perfSONAR/Minor_Packages $MINOR_PKGS
+for p in $MINOR_PKGS; do 
+	find RPMS -name $p'*' -exec yum -y install {} \;
+done
