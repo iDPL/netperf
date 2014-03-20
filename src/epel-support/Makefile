@@ -64,6 +64,7 @@ include Rules.mk
 ## Download packages from EPEL
 
 EPEL_PKGS = libnet \
+	libnet-devel \
 	perl-aliased \
 	perl-AnyEvent \
 	perl-AnyEvent-HTTP \
@@ -97,15 +98,24 @@ EPEL_PKGS = libnet \
 	perl-Sys-MemInfo \
 	perl-Text-CSV_XS
 
-.PHONY: force RPMS $(EPEL_PKGS)
+.PHONY: force RPMS local-config $(EPEL_PKGS)
 
-default: $(HOME)/.rpmmacros rpm-mkdirs $(COMPONENTS) RPMS
-	-yum install epel-release-6-8.noarch.rpm
+default: $(HOME)/.rpmmacros rpm-mkdirs $(COMPONENTS) RPMS 
+	-yum -y install epel-release-6-8.noarch.rpm
 	$(SED) -i 's/^enabled.*/enabled=0/' /etc/yum.repos.d/epel.repo
-	make $(EPEL_PKGS)
+	$(MAKE) $(EPEL_PKGS)
 	-mkdir $(REDHAT.RPMS)/noarch
 	$(INSTALL) RPMS/*noarch*rpm $(REDHAT.RPMS)/noarch
 	$(INSTALL) RPMS/*$(ARCH)*rpm $(REDHAT.RPMS)/$(ARCH)
+	$(MAKE) localrepo
+
+localrepo: local-config
+	cd RPMS; createrepo --basedir=. .
+
+local-config: RPMS
+	echo "[local]" > RPMS/local
+	echo "name='EPEL Local Cache'" >> RPMS/local
+	echo "baseurl=file:`pwd`/RPMS" >> RPMS/local
 RPMS:
 	-mkdir RPMS
 

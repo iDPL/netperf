@@ -59,10 +59,18 @@
 
 . $ROLLSROOT/etc/bootstrap-functions.sh
 
+
+## Packages come from various sources for perfSonar. Grab/make packages required for building
+## 
+OSPKGS="libpcap-devel perl-Class-Accessor"
+yum install -y $OSPKGS
+
 ## Add specific packages from EPEL
+make -C src/epel-support 
 PKGS="perl-Carp-Assert perl-Net-Domain-TLD perl-Net-Netmask perl-Net-Daemon perl-Crypt-CBC perl-Crypt-DES libnet libnet-devel"
-make -C src/epel-support $PKGS
-yum -y install --disablerepo='*' --enablerepo=epel $PKGS
+pushd src/epel-support/RPMS
+yum -c local --disablerepo='*' --enablerepo=local install $PKGS 
+popd
 
 ## Add Minor packages from PerfSONAR build
 MINOR_PKGS="perl-NetAddr-IP"
