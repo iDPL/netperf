@@ -31,4 +31,9 @@
 	<package>roll-netperf-usersguide</package>
 
 
+<post>
+	<!-- Turn of cpuspeed and irqbalance -->
+	/sbin/chkconfig --del cpuspeed
+	/sbin/chkconfig --del irqbalance
+</post>
 </kickstart>
