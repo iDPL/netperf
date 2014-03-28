@@ -62,13 +62,13 @@
 
 ## Packages come from various sources for perfSonar. Grab/make packages required for building
 ## 
-OSPKGS="libpcap-devel perl-Class-Accessor"
+OSPKGS="libpcap-devel perl-Class-Accessor perl-Test-Pod perl-Test-Pod-Coverage"
 yum install -y $OSPKGS
 
 ## Add specific packages from EPEL
 make -C src/epel-support 
 make -C src/epel-support localrepo
-PKGS="perl-Carp-Assert perl-Net-Domain-TLD perl-Net-Netmask perl-Net-Daemon perl-Crypt-CBC perl-Crypt-DES libnet libnet-devel"
+PKGS="perl-Carp-Assert perl-Net-Domain-TLD perl-Net-Netmask perl-Net-Daemon perl-Net-Server perl-Crypt-CBC perl-Crypt-DES libnet libnet-devel"
 pushd src/epel-support/RPMS
 yum -y -c local --disablerepo='*' --enablerepo=local install $PKGS 
 popd
