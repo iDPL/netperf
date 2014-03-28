@@ -67,9 +67,10 @@ yum install -y $OSPKGS
 
 ## Add specific packages from EPEL
 make -C src/epel-support 
+make -C src/epel-support localrepo
 PKGS="perl-Carp-Assert perl-Net-Domain-TLD perl-Net-Netmask perl-Net-Daemon perl-Crypt-CBC perl-Crypt-DES libnet libnet-devel"
 pushd src/epel-support/RPMS
-yum -c local --disablerepo='*' --enablerepo=local install $PKGS 
+yum -y -c local --disablerepo='*' --enablerepo=local install $PKGS 
 popd
 
 ## Add Minor packages from PerfSONAR build
